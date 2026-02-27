@@ -106,3 +106,13 @@ TEST_CASE("Deposit works standard", "[deposit-positive]") {
 
   REQUIRE(atm.CheckBalance(11111111, 1111) == Approx(150.0));
 }
+
+TEST_CASE("Ledger handling", "[ledge-DNE]") {
+  Atm atm;
+
+  REQUIRE_THROWS_AS(
+      atm.PrintLedger("hello.txt", 12345678, 1234),
+      std::invalid_argument
+  );
+
+}
