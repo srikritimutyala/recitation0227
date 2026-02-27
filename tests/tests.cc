@@ -97,3 +97,12 @@ TEST_CASE("WithdrawCash throws invalid_argument on negative amount", "[withdraw-
 
   REQUIRE(atm.CheckBalance(11111111, 1111) == Approx(100.0));
 }
+
+TEST_CASE("Deposit works standard", "[deposit-positive]") {
+  Atm atm;
+  atm.RegisterAccount(11111111, 1111, "Alice", 100.0);
+
+  atm.DepositCash(11111111, 1111, 50.0);
+
+  REQUIRE(atm.CheckBalance(11111111, 1111) == Approx(150.0));
+}
