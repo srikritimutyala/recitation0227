@@ -85,3 +85,15 @@ TEST_CASE("RegisterAccount throws on duplicate", "[register]") {
       std::invalid_argument
   );
 }
+
+TEST_CASE("WithdrawCash throws invalid_argument on negative amount", "[withdraw-negative]") {
+  Atm atm;
+  atm.RegisterAccount(11111111, 1111, "Alice", 100.0);
+
+  REQUIRE_THROWS_AS(
+      atm.WithdrawCash(11111111, 1111, -5.0),
+      std::invalid_argument
+  );
+
+  REQUIRE(atm.CheckBalance(11111111, 1111) == Approx(100.0));
+}
